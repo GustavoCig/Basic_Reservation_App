@@ -1,10 +1,10 @@
 $( function() {
 	    var alertWindow, reservationDialog, reservationForm,
 	 
-	      // From http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#e-mail-state-%28type=email%29
-	      time = $( "#time" ),
+	      begin = $( "#timeBegin" ),
+	      end = $( "#timeEnd" ),
 	      description = $( "#description" ),
-	      allFields = $( [] ).add( time ).add( description ),
+	      allFields = $( [] ).add( begin ).add( end ).add( description ),
 	      tips = $( ".validateTips" );
 	 
 	    function updateTips( t ) {
@@ -26,17 +26,34 @@ $( function() {
 	        return true;
 	      }
 	    }
+
+	    function checkDates( begin, end ) {
+	    	if( begin.val() === "" || end.val() === "" ) {
+	    		begin.addClass( "ui-state-error" );
+	    		end.addClass( "ui-state-error" );
+	    		updateTips( "One of the time fields has been left empty." );
+	    		return false;
+	    	} else if( begin.val() >= end.val() ) {
+	    		begin.addClass( "ui-state-error" );
+	    		end.addClass( "ui-state-error" );
+	    		updateTips( "Beginning time is bigger or equal to ending time." );
+	    		return false;
+	    	} else {
+	    		return true;
+	    	}
+	    }
 	 
 	    function finishReservation() {
 	      var valid = true;
 	      allFields.removeClass( "ui-state-error" );
 	 
-	      valid = valid && checkLength( time, "username", 3, 16 );
+	      valid = valid && checkDates( begin, end );
 	      valid = valid && checkLength( description, "descrição", 1, 585 );
 	 
 	      if ( valid ) {
 	        $( "#users tbody" ).append( "<tr>" +
-	          "<td>" + time.val() + "</td>" +
+	          "<td>" + begin.val() + "</td>" +
+	          "<td>" + end.val() + "</td>" +
 	          "<td>" + description.val() + "</td>" +
 	        "</tr>" );
 	        reservationDialog.dialog( "close" );
@@ -98,16 +115,14 @@ $( function() {
 		    scrollbar: true,
 		    zindex: 1000
 	    });
-	    $(document).ready(function(){
-		    $('#timeEnd').timepicker({
-		        timeFormat: 'HH:mm',
-			    interval: 60,
-			    minTime: '06:00',
-			    maxTime: '23:00',
-			    dynamic: false,
-			    dropdown: true,
-			    scrollbar: true,
-		        zindex: 1000
-		    });
+		$('#timeEnd').timepicker({
+		    timeFormat: 'HH:mm',
+			interval: 60,
+			minTime: '06:00',
+			maxTime: '23:00',
+			dynamic: false,
+			dropdown: true,
+			scrollbar: true,
+		    zindex: 1000
 		});
 	  } );
