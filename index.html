@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JQuery Modal Test</title>
+	<script src='jquery-3.3.1.js'></script>
+	<script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.min.css"></link>
+	<link rel="stylesheet" href="style.css"></link>
+</head>
+<body>
+
+<div id="dialog-confirm" title="Alerta para requisições especiais">
+  <p><span class="ui-icon ui-icon-alert" style="float:right; margin:12px 12px 20px 0;"></span><p>O requerimento de reservas para casos especiais ou não contemplados pelas opções dispostas no sistema, é um requerimento mais lento, que passará pela avaliação de um grupo moderador, podendo ser, inclusive, eventualmente negada.</p><p>Qualquer resultado a cerca do requerimento será repassado ao usuário cadastrante através de e-mail.</p><p>Ademais, qualquer requisição formalizada através deste requerimento especial cuja qual pudesse ser contemplada por opções já presentes no sistema será negada.</p><p>Deseja continuar com cadastro?</p>
+</div>
+
+<div id="dialog-form" title="Criar requisição especial">
+  <p class="validateTips">Preencha todos os campos.</p>
+ 
+  <form>
+    <fieldset>
+      <label for="time">Time</label>
+      <input type="text" name="time" id="time" placeholder="Hora de inicio/Hora de fim" class="text ui-widget-content ui-corner-all">
+      <label for="description">Descrição</label>
+      <textarea type="textarea" name="description" id="description" rows="8" cols="70" maxlength="585" required placeholder='Descreva sua requisição da forma mais completa e detalhada possível. Exemplo: "Desejo reservar a Sala X na hora especificada acima toda a primeira segunda-feira de cada mês."' class="text ui-widget-content ui-corner-all"></textarea>
+      
+      <!-- Allow form submission with keyboard without duplicating the dialog button -->
+      <input type="Enviar requisição" tabindex="-1" style="position:absolute; top:-1000px">
+    </fieldset>
+  </form>
+</div> 
+ 
+<div id="users-contain" class="ui-widget">
+  <h1>Registered Reservations:</h1>
+  <table id="users" class="ui-widget ui-widget-content">
+    <thead>
+      <tr class="ui-widget-header ">
+        <th>Time</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<button id="special-cases">Register a special reservation</button>
+</body>
+</html>
