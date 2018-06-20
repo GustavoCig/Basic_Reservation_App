@@ -3,11 +3,14 @@
 <head>
 	<meta charset="UTF-8">
 	<title>JQuery Modal Test</title>
-	<script src='jquery-3.3.1.js'></script>
-	<script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
-	<script src="script.js"></script>
-	<link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.min.css"></link>
-	<link rel="stylesheet" href="style.css"></link>
+  <link rel="stylesheet" href="jquery-ui-1.12.1.custom/jquery-ui.min.css"></link>
+  <link rel="stylesheet" href="css/style.css"></link>
+  <link rel="stylesheet" href="css/jquery.timepicker.css">
+	<script src='scripts/jquery-3.3.1.js'></script>
+  <script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+  <script src="scripts/jquery.timepicker.js"></script>
+  <script src="scripts/script.js"></script>
+  
 </head>
 <body>
 
@@ -16,14 +19,22 @@
 </div>
 
 <div id="dialog-form" title="Criar requisição especial">
-  <p class="validateTips">Preencha todos os campos.</p>
+  <p class="validateTips">Fill all fields</p>
  
   <form>
     <fieldset>
-      <label for="time">Time</label>
-      <input type="text" name="time" id="time" placeholder="Hora de inicio/Hora de fim" class="text ui-widget-content ui-corner-all">
-      <label for="description">Descrição</label>
-      <textarea type="textarea" name="description" id="description" rows="8" cols="70" maxlength="585" required placeholder='Descreva sua requisição da forma mais completa e detalhada possível. Exemplo: "Desejo reservar a Sala X na hora especificada acima toda a primeira segunda-feira de cada mês."' class="text ui-widget-content ui-corner-all"></textarea>
+      <label for="timeBegin">Begins</label>
+      <input type="text" name="timeBegin" id="timeBegin" class="text ui-widget-content ui-corner-all" readonly>
+      <label for="timeEnd">Ends</label>
+      <input type="text" name="timeEnd" id="timeEnd" class="text ui-widget-content ui-corner-all" readonly>
+      <label for="description">Description</label>
+      <textarea type="textarea" name="description" id="description" rows="8" cols="70" maxlength="585" required placeholder='Describe your requisition in the most complete and detailed way you can. Example: "I would like to reserve Room X in the specified timeslot above every first monday of each month.' class="text ui-widget-content ui-corner-all"></textarea>
+
+      <!-- Above textarea element, but with it's placeholder/description in portuguese
+
+      <textarea type="textarea" name="description" id="description" rows="8" cols="70" maxlength="585" required placeholder='Descreva sua requisição da forma mais completa e detalhada possível. Exemplo: "Desejo reservar a Sala X na hora especificada acima toda a primeira segunda-feira de cada mês."'></textarea>
+
+      -->
       
       <!-- Allow form submission with keyboard without duplicating the dialog button -->
       <input type="Enviar requisição" tabindex="-1" style="position:absolute; top:-1000px">
@@ -36,7 +47,8 @@
   <table id="users" class="ui-widget ui-widget-content">
     <thead>
       <tr class="ui-widget-header ">
-        <th>Time</th>
+        <th>Beginning at</th>
+        <th>Ending at</th>
         <th>Description</th>
       </tr>
     </thead>
@@ -47,5 +59,6 @@
   </table>
 </div>
 <button id="special-cases">Register a special reservation</button>
+
 </body>
 </html>
