@@ -54,7 +54,16 @@
 
 <div id="reservation-confirm" title="Reservation requisition sent">
   <p>Requisition sent for analysis, confirmation or denial will be sent through e-mail.</p>
-  <?php mail('gustavocignachi@hotmail.com', 'test PHP', 'LUL'); ?>
+  <?php 
+
+    $message = 'Line 1\r\nLine 2\r\nLine 3';
+    $message = wordwrap($message, 70, "\r\n");
+
+    if(mail('gustavocignachi@hotmail.com', 'test PHP', $message)){
+        echo "The email was successfully sent.";
+    } else {
+        echo "The email was NOT sent.";
+    } ?>
 </div>
  
 <div id="users-contain" class="ui-widget">

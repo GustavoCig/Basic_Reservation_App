@@ -1,5 +1,5 @@
 $( function() {
-	    var alertWindow, reservationDialog, reservationForm,
+	    var alertWindow, reservationDialog, reservationForm, reservationConfirm,
 	 
 	      begin = $( "#timeBegin" ),
 	      end = $( "#timeEnd" ),
@@ -19,8 +19,8 @@ $( function() {
 	    function checkLength( o, n, min, max ) {
 	      if ( o.val().length > max || o.val().length < min ) {
 	        o.addClass( "ui-state-error" );
-	        updateTips( "Quantidade de caracteres da " + n + " deve estar entre " +
-	          min + " e " + max + "." );
+	        updateTips( "Number of characters of " + n + " has to be between " +
+	          min + " and " + max + "." );
 	        return false;
 	      } else {
 	        return true;
@@ -48,7 +48,7 @@ $( function() {
 	      allFields.removeClass( "ui-state-error" );
 	 
 	      valid = valid && checkDates( begin, end );
-	      valid = valid && checkLength( description, "descrição", 1, 585 );
+	      valid = valid && checkLength( description, "description", 1, 585 );
 	 
 	      if ( valid ) {
 	        $( "#users tbody" ).append( "<tr>" +
@@ -56,8 +56,11 @@ $( function() {
 	          "<td>" + end.val() + "</td>" +
 	          "<td>" + description.val() + "</td>" +
 	        "</tr>" );
-	        reservationDialog.dialog( "close" );
+	        
 	      }
+	      reservationDialog.dialog( "close" );
+	      reservationConfirm.dialog( "open" );
+
 	      return valid;
 	    }
 
@@ -68,11 +71,11 @@ $( function() {
 	      width: 400,
 	      modal: true,
 	      buttons: {
-	        "Continuar": function() {
+	        "Continue": function() {
 	          $( this ).dialog( "close" );
 	          reservationDialog.dialog( "open" );
 	        },
-	        Cancelar: function() {
+	        Cancel: function() {
 	          $( this ).dialog( "close" );
 	        }
 	      }
@@ -95,6 +98,19 @@ $( function() {
 	        allFields.removeClass( "ui-state-error" );
 	      }
 	    });
+
+	    reservationConfirm = $( "#reservation-confirm" ).dialog({
+	    	autoOpen: false,
+	      	resizable: false,
+		    height: "auto",
+		    width: "auto",
+		    modal: true,
+		    buttons: {
+		    	"Confirm": function() {
+		        	$( this ).dialog( "close" );
+		        }
+		    }
+	    }),
 	 
 	    form = reservationDialog.find( "form" ).on( "submit", function( event ) {
 	      event.preventDefault();
